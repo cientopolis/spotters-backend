@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @candidate.status %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @candidate.location %>
+</p>
+
+<p>
+  <strong>Heading:</strong>
+  <%= @candidate.heading %>
+</p>
+
+<p>
+  <strong>Pitch:</strong>
+  <%= @candidate.pitch %>
+</p>
+
+<p>
+  <strong>Candidate type:</strong>
+  <%= @candidate.candidate_type %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @candidate.owner %>
+</p>
+
+<p>
+  <strong>Expert:</strong>
+  <%= @candidate.expert %>
+</p>
+
+<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
+<%= link_to 'Back', candidates_path %>

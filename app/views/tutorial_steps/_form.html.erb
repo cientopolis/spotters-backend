@@ -1,0 +1,32 @@
+<%= form_for(tutorial_step) do |f| %>
+  <% if tutorial_step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tutorial_step.errors.count, "error") %> prohibited this tutorial_step from being saved:</h2>
+
+      <ul>
+      <% tutorial_step.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %>
+    <%= f.number_field :position %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

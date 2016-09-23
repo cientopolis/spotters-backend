@@ -1,0 +1,1 @@
+json.partial! "candidate_types/candidate_type", candidate_type: @candidate_type

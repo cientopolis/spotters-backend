@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  positive: false
+  user: one
+  candidate: one
+
+two:
+  positive: false
+  user: two
+  candidate: two

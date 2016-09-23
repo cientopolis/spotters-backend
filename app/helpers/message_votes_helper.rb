@@ -1,0 +1,2 @@
+module MessageVotesHelper
+end

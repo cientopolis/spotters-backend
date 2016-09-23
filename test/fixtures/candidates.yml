@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  location: 
+  heading: 1.5
+  pitch: 1.5
+  candidate_type: one
+  owner: one
+  expert: one
+
+two:
+  status: MyString
+  location: 
+  heading: 1.5
+  pitch: 1.5
+  candidate_type: two
+  owner: two
+  expert: two

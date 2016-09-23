@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @candidate_type.name %>
+</p>
+
+<p>
+  <strong>Points confirmed:</strong>
+  <%= @candidate_type.points_confirmed %>
+</p>
+
+<p>
+  <strong>Points rejected:</strong>
+  <%= @candidate_type.points_rejected %>
+</p>
+
+<p>
+  <strong>Points success:</strong>
+  <%= @candidate_type.points_success %>
+</p>
+
+<p>
+  <strong>Points failure:</strong>
+  <%= @candidate_type.points_failure %>
+</p>
+
+<%= link_to 'Edit', edit_candidate_type_path(@candidate_type) %> |
+<%= link_to 'Back', candidate_types_path %>

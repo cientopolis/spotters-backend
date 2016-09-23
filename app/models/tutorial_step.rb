@@ -1,0 +1,2 @@
+class TutorialStep < ApplicationRecord
+end

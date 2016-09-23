@@ -1,0 +1,1 @@
+json.array! @candidate_types, partial: 'candidate_types/candidate_type', as: :candidate_type
