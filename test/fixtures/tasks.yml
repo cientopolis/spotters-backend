@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  multiple: false
+  type: 
+  content: 
+  next: one
+
+two:
+  multiple: false
+  type: 
+  content: 
+  next: two

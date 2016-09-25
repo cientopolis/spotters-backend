@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Positive:</strong>
+  <%= @classification_vote.positive %>
+</p>
+
+<p>
+  <strong>Classification:</strong>
+  <%= @classification_vote.classification %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @classification_vote.user %>
+</p>
+
+<%= link_to 'Edit', edit_classification_vote_path(@classification_vote) %> |
+<%= link_to 'Back', classification_votes_path %>

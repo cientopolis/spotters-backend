@@ -1,0 +1,1 @@
+json.partial! "classification_votes/classification_vote", classification_vote: @classification_vote

@@ -5,7 +5,6 @@ class CreateCandidates < ActiveRecord::Migration[5.0]
       t.st_point :location, geographic: true
       t.float :heading
       t.float :pitch
-      t.references :candidate_type, index: true, foreign_key: true, null: false
       t.belongs_to :owner, index: true, null: false
       t.belongs_to :expert, index: true
 

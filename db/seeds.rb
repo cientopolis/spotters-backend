@@ -8,112 +8,6 @@
 
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
-icon_unknown = File.new(File.join(Rails.root, '/app/assets/images/unknown.png'))
-icon_negative_confirmed = File.new(File.join(Rails.root, '/app/assets/images/negative-confirmed.png'))
-icon_negative_rejected = File.new(File.join(Rails.root, '/app/assets/images/negative-rejected.png'))
-icon_negative_unknown = File.new(File.join(Rails.root, '/app/assets/images/negative-unknown.png'))
-icon_positive_confirmed = File.new(File.join(Rails.root, '/app/assets/images/positive-confirmed.png'))
-icon_positive_rejected = File.new(File.join(Rails.root, '/app/assets/images/positive-rejected.png'))
-icon_positive_unknown = File.new(File.join(Rails.root, '/app/assets/images/positive-unknown.png'))
-
-candidate_types = CandidateType.create!([{
-  :name => 'Monumento',
-  :points_success => 100,
-  :points_failure => -50,
-  :points_confirmed => 500,
-  :points_rejected => -100,
-  :icon_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_unknown),
-    :tempfile => icon_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_unknown.path).first.content_type
-  ),
-  :icon_negative_confirmed => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_confirmed),
-    :tempfile => icon_negative_confirmed,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_confirmed.path).first.content_type
-  ),
-  :icon_negative_rejected => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_rejected),
-    :tempfile => icon_negative_rejected,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_rejected.path).first.content_type
-  ),
-  :icon_negative_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_unknown),
-    :tempfile => icon_negative_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_unknown.path).first.content_type
-  ),
-  :icon_positive_confirmed => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_confirmed),
-    :tempfile => icon_positive_confirmed,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_confirmed.path).first.content_type
-  ),
-  :icon_positive_rejected => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_rejected),
-    :tempfile => icon_positive_rejected,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_rejected.path).first.content_type
-  ),
-  :icon_positive_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_unknown),
-    :tempfile => icon_positive_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_unknown.path).first.content_type
-  )
-}, {
-  :name => 'Escultura',
-  :points_success => 100,
-  :points_failure => -50,
-  :points_confirmed => 500,
-  :points_rejected => -100,
-  :icon_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_unknown),
-    :tempfile => icon_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_unknown.path).first.content_type
-  ),
-  :icon_negative_confirmed => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_confirmed),
-    :tempfile => icon_negative_confirmed,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_confirmed.path).first.content_type
-  ),
-  :icon_negative_rejected => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_rejected),
-    :tempfile => icon_negative_rejected,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_rejected.path).first.content_type
-  ),
-  :icon_negative_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_negative_unknown),
-    :tempfile => icon_negative_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_negative_unknown.path).first.content_type
-  ),
-  :icon_positive_confirmed => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_confirmed),
-    :tempfile => icon_positive_confirmed,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_confirmed.path).first.content_type
-  ),
-  :icon_positive_rejected => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_rejected),
-    :tempfile => icon_positive_rejected,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_rejected.path).first.content_type
-  ),
-  :icon_positive_unknown => ActionDispatch::Http::UploadedFile.new(
-    :filename => File.basename(icon_positive_unknown),
-    :tempfile => icon_positive_unknown,
-    # detect the image's mime type with MIME if you can't provide it yourself.
-    :type => MIME::Types.type_for(icon_positive_unknown.path).first.content_type
-  )
-}])
-
 levels = Level.create([{
   :name => 'Principainte',
   :required_points => 0
@@ -171,6 +65,58 @@ users = User.create([{
   :level_id => levels.first.id
 }])
 
+workflow = Workflow.create({
+  :name => 'Workflow Principal'
+})
+
+task3 = Task.create({
+  :multiple => false,
+  :widget_type => 'text',
+  :content => '{
+    question: \'Qué otras observaciones puede agregar?\'
+  }',
+  :workflow_id => workflow.id
+})
+
+task2 = Task.create({
+  :multiple => true,
+  :widget_type => 'choice',
+  :content => '{
+    question: \'Qué materiales cree que conforman el elemento?\',
+    answers: [
+      \'Mármol\',
+      \'Cemento\',
+      \'Hormigón\',
+      \'Marfil\',
+      \'Ladrillos\'
+    ]
+  }',
+  :workflow_id => workflow.id,
+  :next_id => task3.id
+})
+
+task1 = Task.create({
+  :multiple => false,
+  :widget_type => 'choice',
+  :content => "{
+    question: \'Qué tipo de elemento ve en el panorama?\',
+    answers: [
+      {
+        label: \'Escultura\',
+        next: #{task2.id}
+      },
+      {
+        label: \'Monumento\',
+        next: #{task2.id}
+      }
+    ]
+  }",
+  :workflow_id => workflow.id
+})
+
+workflow.first_task_id = task1.id
+workflow.save!
+
 points = ['POINT(-57.95813798904419 -34.923061847053205)', 'POINT(-57.960476875305176 -34.92202381766965)',
   'POINT(-57.95283794403076 -34.92288591079369)', 'POINT(-57.96339511871338 -34.92307944065842)',
   'POINT(-57.95554161071777 -34.92336093782872)', 'POINT(-57.95835256576538 -34.91961342761163)']
@@ -185,25 +131,39 @@ points.each do |point|
     :location => point,
     :heading => 0,
     :pitch => 0,
-    :candidate_type_id => candidate_types.sample.id,
     :owner_id => users.sample.id
   })]
 end
 
 candidates.each do |candidate|
-  CandidateVote.create([{
-    :positive => [true, false].sample,
+  classification = Classification.create({
     :candidate_id => candidate.id,
-    :user_id => users[0].id
-  }, {
-    :positive => [true, false].sample,
-    :candidate_id => candidate.id,
-    :user_id => users[1].id
-  }, {
-    :positive => [true, false].sample,
-    :candidate_id => candidate.id,
-    :user_id => users[2].id
-  }])
+    :data => "[
+      {
+        question: \'Qué tipo de elemento ve en el panorama?\',
+        answer: \'Escultura\'
+      },
+      {
+        question: \'Qué materiales cree que conforman el elemento?\',
+        answer: [
+          \'Mármol\',
+          \'Cemento\'
+        ]
+      },
+      {
+        question: \'Qué otras observaciones puede agregar?\',
+        answer: \'Escultura de mediados de la década del 90\'
+      }
+    ]"
+  })
+
+  4.times do |i|
+    ClassificationVote.create({
+      :positive => [true, false].sample,
+      :classification_id => classification.id,
+      :user_id => users.sample.id
+    })
+  end
 
   messages = Message.create([{
     :text => 'Mensaje de prueba',
