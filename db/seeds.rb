@@ -81,18 +81,18 @@ task3 = Task.create({
 task2 = Task.create({
   :multiple => true,
   :widget_type => 'choice',
-  :content => '{
+  :content => "{
     question: \'Qué materiales cree que conforman el elemento?\',
+    next_id: #{task3.id},
     answers: [
-      \'Mármol\',
-      \'Cemento\',
-      \'Hormigón\',
-      \'Marfil\',
-      \'Ladrillos\'
+      {label: \'Mármol\'},
+      {label: \'Cemento\'},
+      {label: \'Hormigón\'},
+      {label: \'Marfil\'},
+      {label: \'Ladrillos\'}
     ]
-  }',
+  }",
   :workflow_id => workflow.id,
-  :next_id => task3.id
 })
 
 task1 = Task.create({
@@ -103,11 +103,11 @@ task1 = Task.create({
     answers: [
       {
         label: \'Escultura\',
-        next: #{task2.id}
+        next_id: #{task2.id}
       },
       {
         label: \'Monumento\',
-        next: #{task2.id}
+        next_id: #{task2.id}
       }
     ]
   }",
@@ -140,18 +140,18 @@ candidates.each do |candidate|
     :candidate_id => candidate.id,
     :data => "[
       {
-        question: \'Qué tipo de elemento ve en el panorama?\',
+        question: #{task1.id},
         answer: \'Escultura\'
       },
       {
-        question: \'Qué materiales cree que conforman el elemento?\',
+        question: #{task2.id},
         answer: [
           \'Mármol\',
           \'Cemento\'
         ]
       },
       {
-        question: \'Qué otras observaciones puede agregar?\',
+        question: #{task3.id},
         answer: \'Escultura de mediados de la década del 90\'
       }
     ]"
