@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+include CandidatesHelper
+
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
 News.create([{
@@ -103,21 +105,43 @@ task1 = Task.create({
 workflow.first_task_id = task1.id
 workflow.save!
 
-points = ['POINT(-57.95813798904419 -34.923061847053205)', 'POINT(-57.960476875305176 -34.92202381766965)',
-  'POINT(-57.95283794403076 -34.92288591079369)', 'POINT(-57.96339511871338 -34.92307944065842)',
-  'POINT(-57.95554161071777 -34.92336093782872)', 'POINT(-57.95835256576538 -34.91961342761163)']
+points = [{
+  :x => -57.95813798904419,
+  :y => -34.923061847053205
+}, {
+  :x => -57.960476875305176,
+  :y => -34.92202381766965
+}, {
+  :x => -57.95283794403076,
+  :y => -34.92288591079369
+}, {
+  :x => -57.96339511871338,
+  :y => -34.92307944065842
+}, {
+  :x => -57.95554161071777,
+  :y => -34.92336093782872
+}, {
+  :x => -57.95835256576538,
+  :y => -34.91961342761163
+}, {
+  :x => -57.95813798904419,
+  :y => -34.923061847053205
+}]
 
 candidate_status = [:active, :locked, :discarded]
 classification_status = [:created, :confirmed, :rejected]
+
+factory = RGeo::Geographic.spherical_factory(srid: 4326)
 
 candidates = []
 
 points.each do |point|
   candidates += [Candidate.create({
     :status => candidate_status.sample,
-    :location => point,
+    :location => factory.point(point[:x], point[:y]),
     :heading => 0,
     :pitch => 0,
+    :picture => download_picture(point[:y], point[:x]),
     :owner_id => users.sample.id
   })]
 end
