@@ -34,14 +34,14 @@ ActiveRecord::Schema.define(version: 20160926151844) do
   end
 
   create_table "candidates", force: :cascade do |t|
-    t.string    "status"
+    t.integer   "status",                                                                        default: 0, null: false
     t.geography "location",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.float     "heading"
     t.float     "pitch"
-    t.integer   "owner_id",                                                                      null: false
+    t.integer   "owner_id",                                                                                  null: false
     t.integer   "expert_id"
-    t.datetime  "created_at",                                                                    null: false
-    t.datetime  "updated_at",                                                                    null: false
+    t.datetime  "created_at",                                                                                null: false
+    t.datetime  "updated_at",                                                                                null: false
     t.string    "picture_file_name"
     t.string    "picture_content_type"
     t.integer   "picture_file_size"
@@ -62,24 +62,14 @@ ActiveRecord::Schema.define(version: 20160926151844) do
   end
 
   create_table "classifications", force: :cascade do |t|
-    t.integer  "candidate_id", null: false
+    t.integer  "status",       default: 0, null: false
     t.jsonb    "data"
-    t.integer  "user_id",      null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "candidate_id",             null: false
+    t.integer  "user_id",                  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["candidate_id"], name: "index_classifications_on_candidate_id", using: :btree
     t.index ["user_id"], name: "index_classifications_on_user_id", using: :btree
-  end
-
-  create_table "levels", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "required_points"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
   end
 
   create_table "message_votes", force: :cascade do |t|
@@ -116,10 +106,8 @@ ActiveRecord::Schema.define(version: 20160926151844) do
     t.string   "widget_type"
     t.jsonb    "content"
     t.integer  "workflow_id", null: false
-    t.integer  "next_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["next_id"], name: "index_tasks_on_next_id", using: :btree
     t.index ["workflow_id"], name: "index_tasks_on_workflow_id", using: :btree
   end
 
@@ -154,19 +142,22 @@ ActiveRecord::Schema.define(version: 20160926151844) do
     t.json     "tokens"
     t.boolean  "tutorial",               default: true,    null: false
     t.string   "role",                   default: "user",  null: false
-    t.integer  "level_id",                                 null: false
+    t.integer  "points",                 default: 0,       null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.index ["email"], name: "index_users_on_email", using: :btree
-    t.index ["level_id"], name: "index_users_on_level_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
   create_table "workflows", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "points_confirmed", default: 0, null: false
+    t.integer  "points_rejected",  default: 0, null: false
+    t.integer  "points_success",   default: 0, null: false
+    t.integer  "points_failure",   default: 0, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "first_task_id"
     t.index ["first_task_id"], name: "index_workflows_on_first_task_id", using: :btree
   end
@@ -182,8 +173,6 @@ ActiveRecord::Schema.define(version: 20160926151844) do
   add_foreign_key "messages", "candidates"
   add_foreign_key "messages", "users"
   add_foreign_key "news", "admins", column: "author_id"
-  add_foreign_key "tasks", "tasks", column: "next_id"
   add_foreign_key "tasks", "workflows"
-  add_foreign_key "users", "levels"
   add_foreign_key "workflows", "tasks", column: "first_task_id"
 end

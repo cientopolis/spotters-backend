@@ -1,4 +1,6 @@
 class Classification < ApplicationRecord
+  enum status: [:created, :confirmed, :rejected]
+
   belongs_to :candidate
   belongs_to :user
   has_many :classification_votes

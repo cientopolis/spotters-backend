@@ -6,8 +6,7 @@ Rails.application.routes.draw do
       shallow do
         resources :tutorial_steps
         resources :news
-        resources :levels
-        resources :workflows do
+              resources :workflows do
           resources :tasks
         end
         resources :candidates do

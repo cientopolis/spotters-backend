@@ -44,7 +44,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.0]
 
       t.boolean :tutorial, :default => true, :null => false
       t.string :role, :default => 'user', :null => false
-      t.references :level, index: true, foreign_key: true, null: false
+      t.integer :points, :default => 0, :null => false
 
       t.timestamps
     end

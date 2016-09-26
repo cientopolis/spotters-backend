@@ -1,7 +1,7 @@
 class CreateCandidates < ActiveRecord::Migration[5.0]
   def change
     create_table :candidates do |t|
-      t.string :status
+      t.integer :status, default: 0, null: false
       t.st_point :location, geographic: true
       t.float :heading
       t.float :pitch

@@ -8,17 +8,6 @@
 
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
-levels = Level.create([{
-  :name => 'Principainte',
-  :required_points => 0
-}, {
-  :name => 'Avanzado',
-  :required_points => 200
-}, {
-  :name => 'Experto',
-  :required_points => 500
-}])
-
 News.create([{
   :title => 'Lanzamiento del proyecto (1/8/2016)',
   :text => 'Esta semana se inicia este proyecto, en el que todos colaboraremos para catalogar y estudiar parte del patrimonio cultural de nuestra ciudad.',
@@ -49,24 +38,21 @@ users = User.create([{
   :name => 'Test1',
   :email => 'test1@test.com',
   :password => 'testtest',
-  :password_confirmation => 'testtest',
-  :level_id => levels.first.id
+  :password_confirmation => 'testtest'
 }, {
   :name => 'Test2',
   :email => 'test2@test.com',
   :password => 'testtest',
-  :password_confirmation => 'testtest',
-  :level_id => levels.first.id
+  :password_confirmation => 'testtest'
 }, {
   :name => 'Test3',
   :email => 'test3@test.com',
   :password => 'testtest',
-  :password_confirmation => 'testtest',
-  :level_id => levels.first.id
+  :password_confirmation => 'testtest'
 }])
 
 workflow = Workflow.create({
-  :name => 'Workflow Principal'
+  :name => 'Workflow Principal',
 })
 
 task3 = Task.create({
@@ -121,13 +107,14 @@ points = ['POINT(-57.95813798904419 -34.923061847053205)', 'POINT(-57.9604768753
   'POINT(-57.95283794403076 -34.92288591079369)', 'POINT(-57.96339511871338 -34.92307944065842)',
   'POINT(-57.95554161071777 -34.92336093782872)', 'POINT(-57.95835256576538 -34.91961342761163)']
 
-status = ['confirmed', 'rejected', 'new']
+candidate_status = [:active, :locked, :discarded]
+classification_status = [:created, :confirmed, :rejected]
 
 candidates = []
 
 points.each do |point|
   candidates += [Candidate.create({
-    :status => status.sample,
+    :status => candidate_status.sample,
     :location => point,
     :heading => 0,
     :pitch => 0,
@@ -137,6 +124,7 @@ end
 
 candidates.each do |candidate|
   classification = Classification.create({
+    :status => classification_status.sample,
     :candidate_id => candidate.id,
     :user_id => users.sample.id,
     :data => "[

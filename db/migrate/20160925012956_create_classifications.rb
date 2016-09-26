@@ -1,7 +1,7 @@
 class CreateClassifications < ActiveRecord::Migration[5.0]
   def change
     create_table :classifications do |t|
-      t.belongs_to :candidate, foreign_key: true, null: false
+      t.integer :status, default: 0, null: false
 
       # JSON structure to store the result of each task.
       # Example:
@@ -23,6 +23,8 @@ class CreateClassifications < ActiveRecord::Migration[5.0]
       #   }
       # ]
       t.jsonb :data
+
+      t.belongs_to :candidate, foreign_key: true, null: false
       t.belongs_to :user, foreign_key: true, null: false
 
       t.timestamps

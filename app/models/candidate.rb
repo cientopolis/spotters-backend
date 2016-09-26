@@ -1,4 +1,6 @@
 class Candidate < ApplicationRecord
+  enum status: [:active, :locked, :discarded]
+
   belongs_to :owner, class_name: 'User'
   belongs_to :expert, class_name: 'User'
   has_many :classifications

@@ -5,6 +5,8 @@ require 'uri'
 class Api::V1::CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
   before_action :ensure_json_request
+  before_save :store_current_status
+  after_action :update_users_points, only: [:update]
 
   # GET /candidates.json
   def index
@@ -73,6 +75,20 @@ class Api::V1::CandidatesController < ApplicationController
         file.write(resp.body)
         file.flush
         file
+      end
+    end
+
+    def store_current_status
+      @current_status = @candidate.status_was
+    end
+
+    def update_users_points
+      if @candidate.status != @current_status
+        if @candidate.status == 'confirmed'
+
+        elsif @candidate.status == 'rejected'
+
+        end
       end
     end
 end
