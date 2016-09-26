@@ -4,7 +4,11 @@ class Api::V1::CandidatesController < ApplicationController
 
   # GET /candidates.json
   def index
-    @candidates = Candidate.all
+    if !params[:lat].nil? and !params[:lng].nil?
+      @candidates = Candidate.where("ST_DWithin(ST_GeomFromEWKB(location), ST_GeomFromText('POINT(#{params[:lng]} #{params[:lat]})'), 300, false)")
+    else
+      @candidates = Candidate.all
+    end
   end
 
   # GET /candidates/1.json
@@ -45,6 +49,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:status, :location, :heading, :pitch, :owner_id, :expert_id)
+      params.require(:candidate).permit(:status, :location, :heading, :pitch, :owner_id, :expert_id, :lat, :lng)
     end
 end
