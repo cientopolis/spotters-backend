@@ -60,9 +60,11 @@ ActiveRecord::Schema.define(version: 20160925023526) do
   create_table "classifications", force: :cascade do |t|
     t.integer  "candidate_id", null: false
     t.jsonb    "data"
+    t.integer  "user_id",      null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["candidate_id"], name: "index_classifications_on_candidate_id", using: :btree
+    t.index ["user_id"], name: "index_classifications_on_user_id", using: :btree
   end
 
   create_table "levels", force: :cascade do |t|
@@ -170,6 +172,7 @@ ActiveRecord::Schema.define(version: 20160925023526) do
   add_foreign_key "classification_votes", "classifications"
   add_foreign_key "classification_votes", "users"
   add_foreign_key "classifications", "candidates"
+  add_foreign_key "classifications", "users"
   add_foreign_key "message_votes", "messages"
   add_foreign_key "message_votes", "users"
   add_foreign_key "messages", "candidates"

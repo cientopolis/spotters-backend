@@ -6,6 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       # Stores the question and answers for the current task
       # {
       #   question: \'Qué tipo de elemento ve en el panorama?\',
+      #   next_id: 2
       #   answers: [
       #     {
       #       label: \'Escultura\',
@@ -19,11 +20,8 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       # }
       t.jsonb :content
       t.belongs_to :workflow, foreign_key: true, null: false
-      t.references :next, index: true
 
       t.timestamps
     end
-
-    add_foreign_key :tasks, :tasks, column: :next_id
   end
 end

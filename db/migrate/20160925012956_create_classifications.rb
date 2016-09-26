@@ -23,6 +23,7 @@ class CreateClassifications < ActiveRecord::Migration[5.0]
       #   }
       # ]
       t.jsonb :data
+      t.belongs_to :user, foreign_key: true, null: false
 
       t.timestamps
     end

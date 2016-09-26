@@ -138,6 +138,7 @@ end
 candidates.each do |candidate|
   classification = Classification.create({
     :candidate_id => candidate.id,
+    :user_id => users.sample.id,
     :data => "[
       {
         question: #{task1.id},
