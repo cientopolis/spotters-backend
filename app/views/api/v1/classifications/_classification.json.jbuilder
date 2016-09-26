@@ -1,4 +1,4 @@
-json.extract! classification, :id, :candidate_id, :data, :created_at, :updated_at
+json.extract! classification, :id, :data, :created_at, :updated_at
 json.user do
   json.id classification.user_id
   json.name classification.user.name
@@ -13,4 +13,3 @@ json.classification_votes do
     end
   end
 end
-json.url api_v1_candidate_classification_url(@candidate, classification, format: :json)

@@ -13,4 +13,3 @@ json.message_votes do
     end
   end
 end
-json.url api_v1_candidate_message_url(@candidate, message, format: :json)

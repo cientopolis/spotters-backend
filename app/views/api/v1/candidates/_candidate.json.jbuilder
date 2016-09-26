@@ -60,5 +60,3 @@ json.messages do
     end
   end
 end
-
-json.url api_v1_candidate_url(candidate, format: :json)

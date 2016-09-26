@@ -5,7 +5,7 @@ class Api::V1::MessagesController < ApplicationController
 
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.where(:candidate_id => @candidate.id)
   end
 
   # GET /messages/1.json

@@ -1,12 +1,11 @@
 class Api::V1::ClassificationVotesController < ApplicationController
-  before_action :set_candidate
   before_action :set_classification
   before_action :set_classification_vote, only: [:show, :edit, :update, :destroy]
   before_action :ensure_json_request
 
   # GET /classification_votes.json
   def index
-    @classification_votes = ClassificationVote.all
+    @classification_votes = ClassificationVote.where(:classification_id => @classification.id)
   end
 
   # GET /classification_votes/1.json

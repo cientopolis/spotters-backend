@@ -1,12 +1,11 @@
 class Api::V1::MessageVotesController < ApplicationController
-  before_action :set_candidate
   before_action :set_message
   before_action :set_message_vote, only: [:show, :edit, :update, :destroy]
   before_action :ensure_json_request
 
   # GET /message_votes.json
   def index
-    @message_votes = MessageVote.all
+    @message_votes = MessageVote.where(:message_id => @message.id)
   end
 
   # GET /message_votes/1.json

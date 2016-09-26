@@ -5,7 +5,7 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.where(:workflow_id => @workflow.id)
   end
 
   # GET /tasks/1.json
