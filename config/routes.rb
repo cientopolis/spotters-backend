@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
-  resources :classification_votes
-  resources :tasks
-  resources :workflows
-  resources :classifications
   mount_devise_token_auth_for 'User', at: 'auth'
-  resources :tutorial_steps
-  resources :message_votes
-  resources :messages
-  resources :candidates
-  resources :news
-  resources :levels
+
+  namespace :api, constraints: lambda { |req| req.format == :json } do
+    namespace :v1 do
+      resources :tutorial_steps
+      resources :news
+      resources :levels
+      resources :workflows do
+        resources :tasks
+      end
+      resources :candidates do
+        resources :classifications do
+          resources :classification_votes
+        end
+        resources :messages do
+          resources :message_votes
+        end
+      end
+    end
+  end
 
   devise_for :admins
   as :admin do

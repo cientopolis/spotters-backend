@@ -1,1 +1,0 @@
-json.partial! "message_votes/message_vote", message_vote: @message_vote

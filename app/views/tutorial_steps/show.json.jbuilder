@@ -1,1 +1,0 @@
-json.partial! "tutorial_steps/tutorial_step", tutorial_step: @tutorial_step
