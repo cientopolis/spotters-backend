@@ -1,3 +1,7 @@
+require 'net/http'
+require 'tempfile'
+require 'uri'
+
 class Api::V1::CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
   before_action :ensure_json_request
@@ -18,6 +22,13 @@ class Api::V1::CandidatesController < ApplicationController
   # POST /candidates.json
   def create
     @candidate = Candidate.new(candidate_params)
+
+    # Se construye un punto
+    factory = @candidate.location.factory
+    @candidate.location = factory.point(params[:lng], params[:lat])
+
+    # Se adjunta la imagen
+    @candidate.picture = download_picture(params[:lng], params[:lat])
 
     if @candidate.save
       render :show, status: :created, location: @candidate
@@ -49,6 +60,19 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:status, :location, :heading, :pitch, :owner_id, :expert_id, :lat, :lng)
+      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng)
+    end
+
+    def download_picture(lat, lng)
+      url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&location=#{lat},#{lng}&heading=0&pitch=0&fov=120&key=#{Rails.configuration.google_api_key}"
+      uri = URI.parse(url)
+      Net::HTTP.start(uri.host, uri.port) do |http|
+        resp = http.get(uri.path)
+        file = Tempfile.new((0...8).map { (65 + rand(26)).chr }.join, Dir.tmpdir, 'wb+')
+        file.binmode
+        file.write(resp.body)
+        file.flush
+        file
+      end
     end
 end
