@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+
+  validates :provider, presence: true
+  validates :uid, presence: true
 end
