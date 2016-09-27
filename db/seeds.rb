@@ -6,8 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-include CandidatesHelper
-
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
 News.create([{
@@ -141,7 +139,6 @@ points.each do |point|
     :location => factory.point(point[:x], point[:y]),
     :heading => 0,
     :pitch => 0,
-    :picture => download_picture(point[:y], point[:x]),
     :owner_id => users.sample.id
   })]
 end

@@ -1,5 +1,4 @@
 class Api::V1::CandidatesController < ApplicationController
-  helper CandidatesHelper
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
   before_action :ensure_json_request
 
@@ -23,9 +22,6 @@ class Api::V1::CandidatesController < ApplicationController
     # Se construye un punto
     factory = @candidate.location.factory
     @candidate.location = factory.point(params[:lng], params[:lat])
-
-    # Se adjunta la imagen
-    @candidate.picture = download_picture(params[:lng], params[:lat])
 
     if @candidate.save
       render :show, status: :created, location: @candidate

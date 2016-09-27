@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926151844) do
+ActiveRecord::Schema.define(version: 20160925023526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,18 +34,14 @@ ActiveRecord::Schema.define(version: 20160926151844) do
   end
 
   create_table "candidates", force: :cascade do |t|
-    t.integer   "status",                                                                        default: 0, null: false
-    t.geography "location",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer   "status",                                                              default: 0, null: false
+    t.geography "location",   limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.float     "heading"
     t.float     "pitch"
-    t.integer   "owner_id",                                                                                  null: false
+    t.integer   "owner_id",                                                                        null: false
     t.integer   "expert_id"
-    t.datetime  "created_at",                                                                                null: false
-    t.datetime  "updated_at",                                                                                null: false
-    t.string    "picture_file_name"
-    t.string    "picture_content_type"
-    t.integer   "picture_file_size"
-    t.datetime  "picture_updated_at"
+    t.datetime  "created_at",                                                                      null: false
+    t.datetime  "updated_at",                                                                      null: false
     t.index ["expert_id"], name: "index_candidates_on_expert_id", using: :btree
     t.index ["location"], name: "index_candidates_on_location", using: :gist
     t.index ["owner_id"], name: "index_candidates_on_owner_id", using: :btree
