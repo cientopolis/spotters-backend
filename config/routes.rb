@@ -3,19 +3,17 @@ Rails.application.routes.draw do
 
   namespace :api, constraints: lambda { |req| req.format == :json } do
     namespace :v1 do
-      shallow do
-        resources :tutorial_steps
-        resources :news
-              resources :workflows do
-          resources :tasks
+      resources :tutorial_steps
+      resources :news
+            resources :workflows do
+        resources :tasks
+      end
+      resources :candidates do
+        resources :classifications do
+          resources :classification_votes
         end
-        resources :candidates do
-          resources :classifications do
-            resources :classification_votes
-          end
-          resources :messages do
-            resources :message_votes
-          end
+        resources :messages do
+          resources :message_votes
         end
       end
     end
