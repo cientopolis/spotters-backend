@@ -9,19 +9,19 @@
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
 News.create([{
-  :title => 'Lanzamiento del proyecto (1/8/2016)',
+  :title => 'Lanzamiento del proyecto',
   :text => 'Esta semana se inicia este proyecto, en el que todos colaboraremos para catalogar y estudiar parte del patrimonio cultural de nuestra ciudad.',
   :author_id => admin.id
 }, {
-  :title => 'Semana del barrio Meridiano (10/8/2016)',
+  :title => 'Semana del barrio Meridiano',
   :text => 'Esta semana el objetivo es conocer mas de este tradicional barrio, corazón cultural de La Plata.',
   :author_id => admin.id
 }, {
-  :title => 'Cientopolis en los medios (16/8/2016)',
+  :title => 'Cientopolis en los medios',
   :text => 'Interesante nota en el diario el Día sobre nuestro proyecto: http://go.gl/vffatrs',
   :author_id => admin.id
 }, {
-  :title => 'Voluntarios del mes (1/9/2016)',
+  :title => 'Voluntarios del mes',
   :text => 'Cumplimos un mes de proyecto. Gracias a todos los ciudadanod científicos, en particular a Pincha49, AleGomez, Rochucraft y Maguila, por ser quienes mas contribuciones han hecho en el último mes.',
   :author_id => admin.id
 }])
