@@ -68,9 +68,9 @@ workflow = Workflow.create({
 task3 = Task.create({
   :multiple => false,
   :widget_type => 'text',
-  :content => '{
-    question: \'Qué otras observaciones puede agregar?\'
-  }',
+  :content => "{
+    \"question\": \"Qué otras observaciones puede agregar?\"
+  }".squish,
   :workflow_id => workflow.id
 })
 
@@ -78,16 +78,16 @@ task2 = Task.create({
   :multiple => true,
   :widget_type => 'choice',
   :content => "{
-    question: \'Qué materiales cree que conforman el elemento?\',
-    next_id: #{task3.id},
-    answers: [
-      {label: \'Mármol\'},
-      {label: \'Cemento\'},
-      {label: \'Hormigón\'},
-      {label: \'Marfil\'},
-      {label: \'Ladrillos\'}
+    \"question\": \"Qué materiales cree que conforman el elemento?\",
+    \"next_id\": #{task3.id},
+    \"answers\": [
+      {\"label\": \"Mármol\"},
+      {\"label\": \"Cemento\"},
+      {\"label\": \"Hormigón\"},
+      {\"label\": \"Marfil\"},
+      {\"label\": \"Ladrillos\"}
     ]
-  }",
+  }".squish,
   :workflow_id => workflow.id,
 })
 
@@ -95,18 +95,18 @@ task1 = Task.create({
   :multiple => false,
   :widget_type => 'choice',
   :content => "{
-    question: \'Qué tipo de elemento ve en el panorama?\',
-    answers: [
+    \"question\": \"Qué tipo de elemento ve en el panorama?\",
+    \"answers\": [
       {
-        label: \'Escultura\',
-        next_id: #{task2.id}
+        \"label\": \"Escultura\",
+        \"next_id\": #{task2.id}
       },
       {
-        label: \'Monumento\',
-        next_id: #{task2.id}
+        \"label\": \"Monumento\",
+        \"next_id\": #{task2.id}
       }
     ]
-  }",
+  }".squish,
   :workflow_id => workflow.id
 })
 
@@ -160,21 +160,21 @@ candidates.each do |candidate|
     :user_id => users.sample.id,
     :data => "[
       {
-        question: #{task1.id},
-        answer: \'Escultura\'
+        \"question\": #{task1.id},
+        \"answer\": \"Escultura\"
       },
       {
-        question: #{task2.id},
-        answer: [
-          \'Mármol\',
-          \'Cemento\'
+        \"question\": #{task2.id},
+        \"answer\": [
+          \"Mármol\",
+          \"Cemento\"
         ]
       },
       {
-        question: #{task3.id},
-        answer: \'Escultura de mediados de la década del 90\'
+        \"question\": #{task3.id},
+        \"answer\": \"Escultura de mediados de la década del 90\"
       }
-    ]"
+    ]".squish
   })
 
   4.times do |i|
