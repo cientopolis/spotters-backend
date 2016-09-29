@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925023526) do
+ActiveRecord::Schema.define(version: 20160929123047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(version: 20160925023526) do
     t.datetime "updated_at",               null: false
     t.index ["candidate_id"], name: "index_classifications_on_candidate_id", using: :btree
     t.index ["user_id"], name: "index_classifications_on_user_id", using: :btree
+  end
+
+  create_table "confs", force: :cascade do |t|
+    t.string    "title"
+    t.integer   "zoom"
+    t.geography "center",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.float     "heading_center"
+    t.float     "pitch_center"
+    t.geography "bounds",             limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
+    t.integer   "proximity_distance"
+    t.datetime  "created_at",                                                                    null: false
+    t.datetime  "updated_at",                                                                    null: false
+    t.index ["bounds"], name: "index_confs_on_bounds", using: :gist
+    t.index ["center"], name: "index_confs_on_center", using: :gist
   end
 
   create_table "message_votes", force: :cascade do |t|

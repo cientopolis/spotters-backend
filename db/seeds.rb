@@ -8,6 +8,16 @@
 
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
+Conf.create({
+  :title => 'Spotters',
+  :zoom => 15,
+  :center => 'POINT(-57.9535598 -34.9204897)',
+  :heading_center => 0,
+  :pitch_center => 0,
+  :bounds => 'POLYGON(-57.99948692 -34.95081986, -57.91708946 -34.95081986, -57.91708946 -34.88381872, -57.99948692 -34.88381872, -57.99948692 -34.95081986)',
+  :proximity_distance => 300
+})
+
 News.create([{
   :title => 'Lanzamiento del proyecto',
   :text => 'Esta semana se inicia este proyecto, en el que todos colaboraremos para catalogar y estudiar parte del patrimonio cultural de nuestra ciudad.',
