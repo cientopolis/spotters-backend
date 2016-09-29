@@ -1,24 +1,30 @@
-# README
+# Spotters
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Spotters is a Citicen Science Application Framework.
+This repository holds the API/backend part of the framework, where all the data is stored.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+To run the application it is needed to have the following packages installed:
+* Virtualbox
+* Vagrant
+* Ansible
 
-* System dependencies
+## Installation
 
-* Configuration
+```
+cd railsbox/development
+vagrant up
+```
 
-* Database creation
+Then, from the host, you can go to localhost:3000 to access the API.
 
-* Database initialization
+## Example Data
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The app has a seeds.rb file with some examples. To load those examples follow these steps:
+```
+cd railsbox/development
+vagrant ssh
+cd /spotters
+rake db:seed
+```
