@@ -35,6 +35,8 @@ json.classifications do
           json.id classification_vote.user_id
           json.name classification_vote.user.name
         end
+        json.created_at classification_vote.created_at
+        json.updated_at classification_vote.updated_at
       end
     end
   end
@@ -48,6 +50,8 @@ json.messages do
       json.id message.user_id
       json.name message.user.name
     end
+    json.created_at message.created_at
+    json.updated_at message.updated_at
     json.message_votes do
       json.array! message.message_votes do |message_vote|
         json.id message_vote.id
@@ -56,6 +60,8 @@ json.messages do
           json.id message_vote.user_id
           json.name message_vote.user.name
         end
+        json.created_at message_vote.created_at
+        json.updated_at message_vote.updated_at
       end
     end
   end
