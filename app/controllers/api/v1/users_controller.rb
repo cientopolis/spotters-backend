@@ -4,9 +4,12 @@ class Api::V1::UsersController < ApplicationController
 
   def register
     data = JWT.decode users_params, nil, false
-    @user = User.new
-    @user.sub = data.first["sub"]
-    @user.save
+    @user = User.find_by sub: data.first["sub"]
+    if @user.nil?
+      @user = User.new
+      @user.sub = data.first["sub"]
+      @user.save
+    end
   end
 
   private
