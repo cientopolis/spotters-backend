@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
-
   namespace :api, constraints: lambda { |req| req.format == :json } do
     namespace :v1 do
+      post 'users.json' => 'users#register'
       resources :confs
       resources :tutorial_steps
       resources :news

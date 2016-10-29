@@ -30,13 +30,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jwt'
+gem 'knock', '~> 1.4.2'
+
 gem "paperclip", "~> 5.0.0"
 
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'devise_token_auth'
 gem 'cancancan', '~> 1.10'
 
 gem 'rails_admin', '~> 1.0'

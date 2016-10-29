@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include DeviseTokenAuth::Concerns::SetUserByToken
+  include Knock::Authenticable
   protect_from_forgery with: :exception
 
   def ensure_json_request

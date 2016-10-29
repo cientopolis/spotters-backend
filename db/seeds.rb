@@ -45,20 +45,11 @@ News.create([{
 end
 
 users = User.create([{
-  :name => 'Test1',
-  :email => 'test1@test.com',
-  :password => 'testtest',
-  :password_confirmation => 'testtest'
+  :sub => 'Test1'
 }, {
-  :name => 'Test2',
-  :email => 'test2@test.com',
-  :password => 'testtest',
-  :password_confirmation => 'testtest'
+  :sub => 'Test2'
 }, {
-  :name => 'Test3',
-  :email => 'test3@test.com',
-  :password => 'testtest',
-  :password_confirmation => 'testtest'
+  :sub => 'Test3'
 }])
 
 workflow = Workflow.create({
