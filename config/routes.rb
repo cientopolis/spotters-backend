@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, constraints: lambda { |req| req.format == :json } do
     namespace :v1 do
-      post 'users.json' => 'users#register'
+      post 'users.json' => 'users#sync'
       resources :confs
       resources :tutorial_steps
       resources :news

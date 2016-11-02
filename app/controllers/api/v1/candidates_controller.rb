@@ -5,7 +5,9 @@ class Api::V1::CandidatesController < ApplicationController
   # GET /candidates.json
   def index
     if !params[:lat].nil? and !params[:lng].nil?
-      @candidates = Candidate.where("ST_DWithin(ST_GeomFromEWKB(location), ST_GeomFromText('POINT(#{params[:lng]} #{params[:lat]})'), 300, false)")
+      @candidates = Candidate
+        .includes(:owner, :expert, {classifications: [:user, {classification_votes: :user}]}, {messages: [:user, {message_votes: :user}]})
+        .where("ST_DWithin(ST_GeomFromEWKB(location), ST_GeomFromText('POINT(#{params[:lng]} #{params[:lat]})'), 300, false)")
     else
       @candidates = Candidate.all
     end
