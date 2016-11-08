@@ -5,13 +5,23 @@ class Api::V1::CandidatesController < ApplicationController
 
   # GET /candidates.json
   def index
+    pre = Candidate.includes(:owner, :expert, {classifications: [:user, {classification_votes: :user}]}, {messages: [:user, {message_votes: :user}]})
     if !params[:lat].nil? and !params[:lng].nil?
-      @candidates = Candidate
-        .includes(:owner, :expert, {classifications: [:user, {classification_votes: :user}]}, {messages: [:user, {message_votes: :user}]})
+      pre = pre
         .where("ST_DWithin(ST_GeomFromEWKB(location), ST_GeomFromText('POINT(#{params[:lng]} #{params[:lat]})'), 300, false)")
-    else
-      @candidates = Candidate.all
     end
+
+    if !params[:status].nil?
+      pre = pre
+        .where("status = #{Candidate.statuses[params[:status]]}")
+    end
+
+    if !params[:classification_status].nil?
+      pre = pre
+        .where("classifications.status = #{params[:classification_status]}")
+    end
+
+    @candidates = pre
   end
 
   # GET /candidates/1.json
@@ -56,6 +66,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng)
+      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng, :status, :classification_status)
     end
 end
