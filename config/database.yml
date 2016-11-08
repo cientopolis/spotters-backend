@@ -1,4 +1,4 @@
-# Ansible managed: /Users/agustin/tesis-workspace/spotters/railsbox/ansible/roles/postgresql/templates/database.yml.j2 modified on 2016-09-29 15:41:10 by agustin on MacBook-Pro.fibertel.com.ar
+# Ansible managed: /Users/agustin/tesis-workspace/spotters-backend/railsbox/ansible/roles/postgresql/templates/database.yml.j2 modified on 2016-10-03 14:55:27 by agustin on MacBook-Pro-de-Jorge.local
 
 default: &default
   adapter: postgis

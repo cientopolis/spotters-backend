@@ -1,6 +1,7 @@
 class Api::V1::TutorialStepsController < ApplicationController
-  before_action :set_tutorial_step, only: [:show, :edit, :update, :destroy]
+  before_action :set_tutorial_step, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /tutorial_steps.json
   def index

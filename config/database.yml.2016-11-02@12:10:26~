@@ -1,0 +1,16 @@
+# Ansible managed: /Users/agustin/tesis-workspace/spotters/railsbox/ansible/roles/postgresql/templates/database.yml.j2 modified on 2016-09-29 15:41:10 by agustin on MacBook-Pro.fibertel.com.ar
+
+default: &default
+  adapter: postgis
+  pool: 5
+
+development:
+  <<: *default
+  database: spotters
+
+  username: vagrant
+  password: 
+
+test:
+  <<: *default
+  database: spotters_test

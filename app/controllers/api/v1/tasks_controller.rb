@@ -1,7 +1,8 @@
 class Api::V1::TasksController < ApplicationController
   before_action :set_workflow
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /tasks.json
   def index

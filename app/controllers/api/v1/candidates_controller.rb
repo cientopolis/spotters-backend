@@ -1,6 +1,7 @@
 class Api::V1::CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /candidates.json
   def index

@@ -1,7 +1,8 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :set_candidate
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_message, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /messages.json
   def index
@@ -14,10 +15,13 @@ class Api::V1::MessagesController < ApplicationController
 
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = Message.new
+    @message.text = message_params[:text]
+    @message.candidate = @candidate
+    @message.user = current_user
 
     if @message.save
-      render :show, status: :created, location: @message
+      render :show, status: :created, location: api_v1_candidate_messages_url(@candidate, @message)
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -46,6 +50,6 @@ class Api::V1::MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:text, :user_id, :candidate_id)
+      params.require(:message).permit(:text, :candidate_id)
     end
 end

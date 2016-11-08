@@ -1,7 +1,8 @@
 class Api::V1::MessageVotesController < ApplicationController
   before_action :set_message
-  before_action :set_message_vote, only: [:show, :edit, :update, :destroy]
+  before_action :set_message_vote, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /message_votes.json
   def index

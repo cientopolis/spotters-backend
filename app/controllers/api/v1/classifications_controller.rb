@@ -1,66 +1,42 @@
 class Api::V1::ClassificationsController < ApplicationController
   before_action :set_candidate
-  before_action :set_classification, only: [:show, :edit, :update, :destroy]
+  before_action :set_classification, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
-  # GET /classifications
   # GET /classifications.json
   def index
     @classifications = Classification.where(:candidate_id => @candidate.id)
   end
 
-  # GET /classifications/1
   # GET /classifications/1.json
   def show
   end
 
-  # GET /classifications/new
-  def new
-    @classification = Classification.new
-  end
-
-  # GET /classifications/1/edit
-  def edit
-  end
-
-  # POST /classifications
   # POST /classifications.json
   def create
     @classification = Classification.new(classification_params)
 
-    respond_to do |format|
-      if @classification.save
-        format.html { redirect_to @classification, notice: 'Classification was successfully created.' }
-        format.json { render :show, status: :created, location: @classification }
-      else
-        format.html { render :new }
-        format.json { render json: @classification.errors, status: :unprocessable_entity }
-      end
+    if @classification.save
+      render :show, status: :created, location: @classification
+    else
+      render json: @classification.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /classifications/1
   # PATCH/PUT /classifications/1.json
   def update
-    respond_to do |format|
-      if @classification.update(classification_params)
-        format.html { redirect_to @classification, notice: 'Classification was successfully updated.' }
-        format.json { render :show, status: :ok, location: @classification }
-      else
-        format.html { render :edit }
-        format.json { render json: @classification.errors, status: :unprocessable_entity }
-      end
+    if @classification.update(classification_params)
+      render :show, status: :ok, location: @classification
+    else
+      render json: @classification.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /classifications/1
   # DELETE /classifications/1.json
   def destroy
     @classification.destroy
-    respond_to do |format|
-      format.html { redirect_to classifications_url, notice: 'Classification was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

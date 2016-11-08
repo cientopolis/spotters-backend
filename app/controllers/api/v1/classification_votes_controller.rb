@@ -1,7 +1,8 @@
 class Api::V1::ClassificationVotesController < ApplicationController
   before_action :set_classification
-  before_action :set_classification_vote, only: [:show, :edit, :update, :destroy]
+  before_action :set_classification_vote, only: [:show, :update, :destroy]
   before_action :ensure_json_request
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /classification_votes.json
   def index
