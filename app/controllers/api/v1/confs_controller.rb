@@ -16,9 +16,4 @@ class Api::V1::ConfsController < ApplicationController
     def set_conf
       @conf = Conf.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def conf_params
-      params.require(:conf).permit(:title, :zoom, :center, :heading_center, :pitch_center, :bounds, :proximity_distance)
-    end
 end

@@ -30,7 +30,7 @@ class Api::V1::MessagesController < ApplicationController
   # PATCH/PUT /messages/1.json
   def update
     if @message.update(message_params)
-      render :show, status: :ok, location: @message
+      render :show, status: :ok, location: api_v1_candidate_messages_url(@candidate, @message)
     else
       render json: @message.errors, status: :unprocessable_entity
     end

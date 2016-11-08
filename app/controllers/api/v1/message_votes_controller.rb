@@ -1,4 +1,5 @@
 class Api::V1::MessageVotesController < ApplicationController
+  before_action :set_candidate
   before_action :set_message
   before_action :set_message_vote, only: [:show, :update, :destroy]
   before_action :ensure_json_request
@@ -18,7 +19,7 @@ class Api::V1::MessageVotesController < ApplicationController
     @message_vote = MessageVote.new(message_vote_params)
 
     if @message_vote.save
-      render :show, status: :created, location: @message_vote
+      render :show, status: :created, location: api_v1_candidate_message_message_vote(@candidate, @message, @message_vote)
     else
       format.json { render json: @message_vote.errors, status: :unprocessable_entity }
     end
@@ -27,7 +28,7 @@ class Api::V1::MessageVotesController < ApplicationController
   # PATCH/PUT /message_votes/1.json
   def update
     if @message_vote.update(message_vote_params)
-      render :show, status: :ok, location: @message_vote
+      render :show, status: :ok, location: api_v1_candidate_message_message_vote(@candidate, @message, @message_vote)
     else
       render json: @message_vote.errors, status: :unprocessable_entity
     end

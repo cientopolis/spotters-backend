@@ -27,7 +27,7 @@ class Api::V1::CandidatesController < ApplicationController
     @candidate.location = factory.point(params[:lng], params[:lat])
 
     if @candidate.save
-      render :show, status: :created, location: @candidate
+      render :show, status: :created, location: api_v1_candidate(@candidate)
     else
       render json: @candidate.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Api::V1::CandidatesController < ApplicationController
   # PATCH/PUT /candidates/1.json
   def update
     if @candidate.update(candidate_params)
-      render :show, status: :ok, location: @candidate
+      render :show, status: :ok, location: api_v1_candidate(@candidate)
     else
       render json: @candidate.errors, status: :unprocessable_entity
     end
