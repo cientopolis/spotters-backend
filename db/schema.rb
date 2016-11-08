@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 20160929123047) do
   end
 
   create_table "classification_votes", force: :cascade do |t|
-    t.boolean  "positive"
-    t.integer  "classification_id"
-    t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.boolean  "positive",          default: true, null: false
+    t.integer  "classification_id",                null: false
+    t.integer  "user_id",                          null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["classification_id"], name: "index_classification_votes_on_classification_id", using: :btree
     t.index ["user_id"], name: "index_classification_votes_on_user_id", using: :btree
   end

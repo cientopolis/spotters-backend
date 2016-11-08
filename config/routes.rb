@@ -2,18 +2,18 @@ Rails.application.routes.draw do
   namespace :api, constraints: lambda { |req| req.format == :json } do
     namespace :v1 do
       post 'users.json' => 'users#sync'
-      resources :confs
-      resources :tutorial_steps
-      resources :news
-      resources :workflows do
-        resources :tasks
+      resources :confs, only: [:index, :show]
+      resources :tutorial_steps, only: [:index, :show]
+      resources :news, only: [:index, :show]
+      resources :workflows, only: [:index, :show] do
+        resources :tasks, only: [:index, :show]
       end
-      resources :candidates do
-        resources :classifications do
-          resources :classification_votes
+      resources :candidates, only: [:index, :show, :create, :update, :destroy] do
+        resources :classifications, only: [:index, :show, :create, :update, :destroy] do
+          resources :classification_votes, only: [:index, :show, :create, :update, :destroy]
         end
-        resources :messages do
-          resources :message_votes
+        resources :messages, only: [:index, :show, :create, :update, :destroy] do
+          resources :message_votes, only: [:index, :show, :create, :update, :destroy]
         end
       end
     end

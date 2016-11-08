@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :ensure_json_request
-  before_action :authenticate, only: [:sync]
+  #before_action :authenticate, only: [:sync]
 
   def sync
     data = JWT.decode params[:token], nil, false
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
       @user.name = params[:user][:name]
       @user.email = params[:user][:email]
       @user.save
-    elsif @user.name != params[:user].name or @user.email != params[:user].email
+    elsif @user.name != params[:user][:name] or @user.email != params[:user][:email]
       # We refresh the user data
       @user.name = params[:user][:name]
       @user.email = params[:user][:email]
@@ -24,6 +24,6 @@ class Api::V1::UsersController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def users_params
-      params.require(:token, :user)
+      params.require(:token, :user).permit(:name, :email)
     end
 end

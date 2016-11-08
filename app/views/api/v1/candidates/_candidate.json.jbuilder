@@ -5,14 +5,14 @@ json.lng candidate.location.x
 
 json.owner do
   if !candidate.owner.nil?
-    json.id candidate.owner_id
+    json.sub candidate.owner.sub
     json.name candidate.owner.name
   end
 end
 
 json.expert do
   if !candidate.expert.nil?
-    json.id candidate.expert_id
+    json.sub candidate.expert.sub
     json.name candidate.expert.name
   end
 end
@@ -24,7 +24,7 @@ json.classifications do
     json.created_at classification.created_at
     json.updated_at classification.updated_at
     json.user do
-      json.id classification.user_id
+      json.sub classification.user.sub
       json.name classification.user.name
     end
     json.classification_votes do
@@ -32,7 +32,7 @@ json.classifications do
         json.id classification_vote.id
         json.positive classification_vote.positive
         json.user do
-          json.id classification_vote.user_id
+          json.sub classification_vote.user.sub
           json.name classification_vote.user.name
         end
         json.created_at classification_vote.created_at
@@ -47,7 +47,7 @@ json.messages do
     json.id message.id
     json.text message.text
     json.user do
-      json.id message.user_id
+      json.sub message.user.sub
       json.name message.user.name
     end
     json.created_at message.created_at
@@ -57,7 +57,7 @@ json.messages do
         json.id message_vote.id
         json.positive message_vote.positive
         json.user do
-          json.id message_vote.user_id
+          json.sub message_vote.user.sub
           json.name message_vote.user.name
         end
         json.created_at message_vote.created_at

@@ -16,10 +16,14 @@ class Api::V1::ClassificationVotesController < ApplicationController
 
   # POST /classification_votes.json
   def create
-    @classification_vote = ClassificationVote.new(classification_vote_params)
+    print classification_vote_params.inspect
+    @classification_vote = ClassificationVote.new
+    @classification_vote.user = current_user
+    @classification_vote.positive = classification_vote_params[:positive]
+    @classification_vote.classification = @classification
 
     if @classification_vote.save
-      render :show, status: :created, location: api_v1_candidate_classification_classification_vote(@candidate, @classification, @classification_vote)
+      render :show, status: :created, location: api_v1_candidate_classification_classification_vote_url(@candidate, @classification, @classification_vote)
     else
       render json: @classification_vote.errors, status: :unprocessable_entity
     end
@@ -28,7 +32,7 @@ class Api::V1::ClassificationVotesController < ApplicationController
   # PATCH/PUT /classification_votes/1.json
   def update
     if @classification_vote.update(classification_vote_params)
-      render :show, status: :ok, location: api_v1_candidate_classification_classification_vote(@candidate, @classification, @classification_vote)
+      render :show, status: :ok, location: api_v1_candidate_classification_classification_vote_url(@candidate, @classification, @classification_vote)
     else
       render json: @classification_vote.errors, status: :unprocessable_entity
     end

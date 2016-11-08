@@ -18,7 +18,7 @@ class Api::V1::ClassificationsController < ApplicationController
     @classification = Classification.new(classification_params)
 
     if @classification.save
-      render :show, status: :created, location: api_v1_candidate_classification(@candidate, @classification)
+      render :show, status: :created, location: api_v1_candidate_classification_url(@candidate, @classification)
     else
       render json: @classification.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::ClassificationsController < ApplicationController
   # PATCH/PUT /classifications/1.json
   def update
     if @classification.update(classification_params)
-      render :show, status: :ok, location: api_v1_candidate_classification(@candidate, @classification)
+      render :show, status: :ok, location: api_v1_candidate_classification_url(@candidate, @classification)
     else
       render json: @classification.errors, status: :unprocessable_entity
     end

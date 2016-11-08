@@ -1,7 +1,7 @@
 json.id message.id
 json.text message.text
 json.user do
-  json.id message.user_id
+  json.sub message.user.sub
   json.name message.user.name
 end
 json.created_at message.created_at
@@ -11,7 +11,7 @@ json.message_votes do
     json.id message_vote.id
     json.positive message_vote.positive
     json.user do
-      json.id message_vote.user_id
+      json.sub message_vote.user.sub
       json.name message_vote.user.name
     end
     json.created_at message_vote.created_at
