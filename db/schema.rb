@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 20160929123047) do
   end
 
   create_table "message_votes", force: :cascade do |t|
-    t.boolean  "positive"
-    t.integer  "user_id",    null: false
-    t.integer  "message_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "positive",   default: true, null: false
+    t.integer  "user_id",                   null: false
+    t.integer  "message_id",                null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["message_id"], name: "index_message_votes_on_message_id", using: :btree
     t.index ["user_id"], name: "index_message_votes_on_user_id", using: :btree
   end

@@ -1,4 +1,4 @@
-json.extract! classification, :id, :data, :created_at, :updated_at
+json.extract! classification, :id, :status, :data, :created_at, :updated_at
 json.user do
   json.sub classification.user.sub
   json.name classification.user.name

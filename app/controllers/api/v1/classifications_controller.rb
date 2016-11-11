@@ -26,7 +26,12 @@ class Api::V1::ClassificationsController < ApplicationController
 
   # PATCH/PUT /classifications/1.json
   def update
-    if @classification.update(classification_params)
+    if !classification_params[:status].blank?
+      @classification.status = Classification.statuses[classification_params[:status]]
+      @candidate.status = Candidate.statuses[:locked]
+    end
+
+    if @classification.save and @candidate.save
       render :show, status: :ok, location: api_v1_candidate_classification_url(@candidate, @classification)
     else
       render json: @classification.errors, status: :unprocessable_entity
@@ -47,6 +52,6 @@ class Api::V1::ClassificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classification_params
-      params.require(:classification).permit(:candidate_id, :data)
+      params.require(:classification).permit(:candidate_id, :status, :data)
     end
 end

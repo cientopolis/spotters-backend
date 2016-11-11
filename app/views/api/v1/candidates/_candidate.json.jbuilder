@@ -20,6 +20,7 @@ end
 json.classifications do
   json.array! candidate.classifications do |classification|
     json.id classification.id
+    json.status classification.status
     json.data classification.data
     json.created_at classification.created_at
     json.updated_at classification.updated_at
