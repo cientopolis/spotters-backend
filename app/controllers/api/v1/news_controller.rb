@@ -1,7 +1,6 @@
 class Api::V1::NewsController < ApplicationController
   before_action :set_news, only: [:show]
   before_action :ensure_json_request
-  before_action :authenticate, only: [:create, :update, :destroy]
 
   # GET /news.json
   def index

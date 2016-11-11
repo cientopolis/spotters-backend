@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20160929123047) do
     t.string   "sub",                         null: false
     t.string   "name"
     t.string   "email"
-    t.boolean  "tutorial",   default: true,   null: false
+    t.boolean  "tutorial",   default: false,  null: false
     t.string   "role",       default: "user", null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

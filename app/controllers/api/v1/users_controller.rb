@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :ensure_json_request
-  #before_action :authenticate, only: [:sync]
+  before_action :authenticate, only: [:tutorial_complete, :tutorial]
 
   def sync
     data = JWT.decode params[:token], nil, false
@@ -19,6 +19,16 @@ class Api::V1::UsersController < ApplicationController
       @user.email = params[:user][:email]
       @user.save
     end
+  end
+
+  def tutorial_complete
+    render json: {tutorial_complete: current_user.tutorial}
+  end
+
+  def tutorial
+    current_user.tutorial = true
+    current_user.save
+    render json: {tutorial_complete: current_user.tutorial}
   end
 
   private
