@@ -1,4 +1,4 @@
-# Ansible managed: /Users/agustin/tesis-workspace/spotters-backend/railsbox/ansible/roles/puma/templates/puma.rb.j2 modified on 2016-10-03 14:55:27 by agustin on MacBook-Pro-de-Jorge.local
+# Ansible managed
 
 # Feel free to experiment with this, 0/16 is a good starting point.
 threads_count = Integer(ENV['MAX_THREADS'] || 5)
