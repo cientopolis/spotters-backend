@@ -13,6 +13,12 @@ To run the application it is needed to have the following packages installed:
 ## Installation
 
 ```
+cp config/secrets.sample.yml
+```
+
+Configure in that file your own API keys and secrets and then:
+
+```
 cd railsbox/development
 vagrant up
 ```
