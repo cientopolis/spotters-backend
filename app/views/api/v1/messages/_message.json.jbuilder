@@ -3,6 +3,7 @@ json.text message.text
 json.user do
   json.sub message.user.sub
   json.name message.user.name
+  json.role message.user.role
 end
 json.created_at message.created_at
 json.updated_at message.updated_at
@@ -13,6 +14,7 @@ json.message_votes do
     json.user do
       json.sub message_vote.user.sub
       json.name message_vote.user.name
+      json.role message_vote.user.role
     end
     json.created_at message_vote.created_at
     json.updated_at message_vote.updated_at

@@ -2,6 +2,7 @@ json.extract! classification, :id, :status, :data, :created_at, :updated_at
 json.user do
   json.sub classification.user.sub
   json.name classification.user.name
+  json.role classification.user.role
 end
 json.classification_votes do
   json.array! classification.classification_votes do |classification_vote|
@@ -10,6 +11,7 @@ json.classification_votes do
     json.user do
       json.sub classification_vote.user.sub
       json.name classification_vote.user.name
+      json.role classification_vote.user.role
     end
   end
 end

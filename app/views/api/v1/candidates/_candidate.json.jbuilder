@@ -7,6 +7,7 @@ json.owner do
   if !candidate.owner.nil?
     json.sub candidate.owner.sub
     json.name candidate.owner.name
+    json.role candidate.owner.role
   end
 end
 
@@ -14,6 +15,7 @@ json.expert do
   if !candidate.expert.nil?
     json.sub candidate.expert.sub
     json.name candidate.expert.name
+    json.role candidate.expert.role
   end
 end
 
@@ -27,6 +29,7 @@ json.classifications do
     json.user do
       json.sub classification.user.sub
       json.name classification.user.name
+      json.role classification.user.role
     end
     json.classification_votes do
       json.array! classification.classification_votes do |classification_vote|
@@ -35,6 +38,7 @@ json.classifications do
         json.user do
           json.sub classification_vote.user.sub
           json.name classification_vote.user.name
+          json.role classification_vote.user.role
         end
         json.created_at classification_vote.created_at
         json.updated_at classification_vote.updated_at
@@ -50,6 +54,7 @@ json.messages do
     json.user do
       json.sub message.user.sub
       json.name message.user.name
+      json.role message.user.role
     end
     json.created_at message.created_at
     json.updated_at message.updated_at
@@ -60,6 +65,7 @@ json.messages do
         json.user do
           json.sub message_vote.user.sub
           json.name message_vote.user.name
+          json.role message_vote.user.role
         end
         json.created_at message_vote.created_at
         json.updated_at message_vote.updated_at
