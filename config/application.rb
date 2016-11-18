@@ -21,7 +21,5 @@ module Spotters
           :methods => [:get, :post, :options, :delete, :put]
       end
     end
-
-    config.google_api_key = 'AIzaSyD7YMLMe9M8ZBk8xtva5iPncyTc1698qEs'
   end
 end
