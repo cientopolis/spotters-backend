@@ -11,4 +11,8 @@ class Candidate < ApplicationRecord
   validates :heading, presence: true
   validates :pitch, presence: true
   validates :owner, presence: true
+
+  rails_admin do
+    include_all_fields
+  end
 end

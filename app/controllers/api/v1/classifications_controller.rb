@@ -28,7 +28,9 @@ class Api::V1::ClassificationsController < ApplicationController
   def update
     if !classification_params[:status].blank?
       @classification.status = Classification.statuses[classification_params[:status]]
+      @classification.expert = current_user
       @candidate.status = Candidate.statuses[:locked]
+      @candidate.expert = current_user
     end
 
     if @classification.save and @candidate.save

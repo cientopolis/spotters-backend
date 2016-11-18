@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post 'users.json' => 'users#sync'
       post 'users/tutorial.json' => 'users#tutorial'
       get 'users/tutorial_complete.json' => 'users#tutorial_complete'
+      get 'users/is_expert.json' => 'users#is_expert'
       resources :confs, only: [:index, :show]
       resources :tutorial_steps, only: [:index, :show]
       resources :news, only: [:index, :show]

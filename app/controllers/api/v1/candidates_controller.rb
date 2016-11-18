@@ -21,6 +21,12 @@ class Api::V1::CandidatesController < ApplicationController
         .where("classifications.status = #{Classification.statuses[params[:classification_status]]}")
     end
 
+    if !params[:sub].blank?
+      pre = pre
+        .joins(:owner, classifications: :user)
+        .where("users.sub = '#{params[:sub]}' OR users_classifications.sub = '#{params[:sub]}'")
+    end
+
     @candidates = pre
   end
 
@@ -45,7 +51,10 @@ class Api::V1::CandidatesController < ApplicationController
 
   # PATCH/PUT /candidates/1.json
   def update
-    if @candidate.update(candidate_params)
+    @candidate.status = Candidate.statuses[candidate_params[:status]]
+    @candidate.expert = current_user
+
+    if @candidate.save
       render :show, status: :ok, location: api_v1_candidate_url(@candidate)
     else
       render json: @candidate.errors, status: :unprocessable_entity
@@ -66,6 +75,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng, :status, :classification_status)
+      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng, :status, :classification_status, :sub)
     end
 end

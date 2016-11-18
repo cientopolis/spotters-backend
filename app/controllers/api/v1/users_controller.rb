@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :ensure_json_request
-  before_action :authenticate, only: [:tutorial_complete, :tutorial]
+  before_action :authenticate, only: [:tutorial_complete, :tutorial, :is_expert]
 
   def sync
     data = JWT.decode params[:token], nil, false
@@ -29,6 +29,11 @@ class Api::V1::UsersController < ApplicationController
     current_user.tutorial = true
     current_user.save
     render json: {tutorial_complete: current_user.tutorial}
+  end
+
+  def is_expert
+    print current_user.role
+    render json: {is_expert: current_user.role == "expert"}
   end
 
   private

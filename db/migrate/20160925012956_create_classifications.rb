@@ -26,8 +26,11 @@ class CreateClassifications < ActiveRecord::Migration[5.0]
 
       t.belongs_to :candidate, foreign_key: true, null: false
       t.belongs_to :user, foreign_key: true, null: false
+      t.belongs_to :expert, index: true
 
       t.timestamps
     end
+
+    add_foreign_key :classifications, :users, column: :expert_id
   end
 end

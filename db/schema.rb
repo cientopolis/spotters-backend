@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20160929123047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
 
   create_table "admins", force: :cascade do |t|
@@ -63,9 +62,11 @@ ActiveRecord::Schema.define(version: 20160929123047) do
     t.jsonb    "data"
     t.integer  "candidate_id",             null: false
     t.integer  "user_id",                  null: false
+    t.integer  "expert_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["candidate_id"], name: "index_classifications_on_candidate_id", using: :btree
+    t.index ["expert_id"], name: "index_classifications_on_expert_id", using: :btree
     t.index ["user_id"], name: "index_classifications_on_user_id", using: :btree
   end
 
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160929123047) do
   add_foreign_key "classification_votes", "users"
   add_foreign_key "classifications", "candidates"
   add_foreign_key "classifications", "users"
+  add_foreign_key "classifications", "users", column: "expert_id"
   add_foreign_key "message_votes", "messages"
   add_foreign_key "message_votes", "users"
   add_foreign_key "messages", "candidates"

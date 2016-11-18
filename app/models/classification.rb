@@ -3,6 +3,7 @@ class Classification < ApplicationRecord
 
   belongs_to :candidate
   belongs_to :user
+  belongs_to :expert, class_name: 'User'
   has_many :classification_votes
 
   validates :status, presence: true
