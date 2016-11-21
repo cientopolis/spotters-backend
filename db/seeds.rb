@@ -8,13 +8,22 @@
 
 admin = Admin.create! :email => 'admin@admin.com', :password => 'adminadmin', :password_confirmation => 'adminadmin'
 
+factory = RGeo::Geographic.spherical_factory(srid: 4326)
+
+center = factory.point(-57.9535598, -34.9204897)
+
+point1 = factory.point(-57.99948692, -34.95081986)
+point2 = factory.point(-57.91708946, -34.95081986)
+point3 = factory.point(-57.91708946, -34.88381872)
+point4 = factory.point(-57.99948692, -34.88381872)
+
 Conf.create({
   :title => 'Spotters',
   :zoom => 15,
-  :center => 'POINT(-57.9535598 -34.9204897)',
+  :center => center,
   :heading_center => 0,
   :pitch_center => 0,
-  :bounds => 'POLYGON(-57.99948692 -34.95081986, -57.91708946 -34.95081986, -57.91708946 -34.88381872, -57.99948692 -34.88381872, -57.99948692 -34.95081986)',
+  :bounds => factory.polygon(factory.linear_ring([point1, point2, point3, point4])),
   :proximity_distance => 300
 })
 
@@ -135,8 +144,6 @@ points = [{
 
 candidate_status = [:active, :locked, :discarded]
 classification_status = [:created, :confirmed, :rejected]
-
-factory = RGeo::Geographic.spherical_factory(srid: 4326)
 
 candidates = []
 

@@ -36,6 +36,13 @@ class Api::V1::CandidatesController < ApplicationController
 
   # POST /candidates.json
   def create
+    @conf = Conf.where("ST_Contains(ST_GeomFromEWKB(bounds), ST_GeomFromText('POINT(#{candidate_params[:lng]} #{candidate_params[:lat]})'))")
+
+    # Si la configuracion es nil quiere decir que el punto se encuentra fuera del rango
+    if @conf.nil?
+      render json: @candidate.errors, status: :unprocessable_entity
+    end
+
     @candidate = Candidate.new(candidate_params)
 
     # Se construye un punto
