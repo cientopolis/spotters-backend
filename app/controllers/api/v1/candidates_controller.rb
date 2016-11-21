@@ -36,12 +36,12 @@ class Api::V1::CandidatesController < ApplicationController
 
   # POST /candidates.json
   def create
-    @candidate = Candidate.new(candidate_params)
+    @candidate = Candidate.new(:heading => candidate_params[:heading], :owner => current_user, :pitch => candidate_params[:pitch])
+    factory = RGeo::Geographic.spherical_factory(srid: 4326)
 
     # Se construye un punto
-    factory = @candidate.location.factory
-    @candidate.location = factory.point(params[:lng], params[:lat])
-
+    @candidate.location = factory.point(candidate_params[:lng], candidate_params[:lat])
+    @candidate.status = Candidate.statuses[candidate_params[:status]]
     if @candidate.save
       render :show, status: :created, location: api_v1_candidate_url(@candidate)
     else
@@ -75,6 +75,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:status, :heading, :pitch, :owner_id, :expert_id, :lat, :lng, :status, :classification_status, :sub)
+      params.require(:candidate).permit(:status, :heading, :pitch, :lng, :lat, :owner_id, :expert_id, :status, :classification_status, :sub)
     end
 end
