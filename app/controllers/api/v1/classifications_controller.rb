@@ -15,7 +15,11 @@ class Api::V1::ClassificationsController < ApplicationController
 
   # POST /classifications.json
   def create
-    @classification = Classification.new(classification_params)
+    @classification = Classification.new({
+      :candidate => Candidate.find(params[:candidate_id]),
+      :data => classification_params[:classification][:data],
+      :user => current_user
+    })
 
     if @classification.save
       render :show, status: :created, location: api_v1_candidate_classification_url(@candidate, @classification)
@@ -54,6 +58,6 @@ class Api::V1::ClassificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classification_params
-      params.require(:classification).permit(:candidate_id, :status, :data)
+      params.permit!
     end
 end
