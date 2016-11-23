@@ -18,7 +18,8 @@ class Api::V1::ClassificationsController < ApplicationController
     @classification = Classification.new({
       :candidate => Candidate.find(params[:candidate_id]),
       :data => classification_params[:classification][:data],
-      :user => current_user
+      :user => current_user,
+      :status => Classification.statuses[:created]
     })
 
     if @classification.save
