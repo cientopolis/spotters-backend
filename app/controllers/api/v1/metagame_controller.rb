@@ -4,6 +4,6 @@ class Api::V1::MetagameController < ApplicationController
 
   # GET /badges.json
   def badges
-    Metagame.get_badges
+    render json: Metagame::Metagame.get_badges(current_user)
   end
 end

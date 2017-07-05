@@ -27,31 +27,31 @@ Conf.create({
   :proximity_distance => 300
 })
 
-# News.create([{
-#   :title => 'Lanzamiento del proyecto',
-#   :text => 'Esta semana se inicia este proyecto, en el que todos colaboraremos para catalogar y estudiar parte del patrimonio cultural de nuestra ciudad.',
-#   :author_id => admin.id
-# }, {
-#   :title => 'Semana del barrio Meridiano',
-#   :text => 'Esta semana el objetivo es conocer mas de este tradicional barrio, corazón cultural de La Plata.',
-#   :author_id => admin.id
-# }, {
-#   :title => 'Cientopolis en los medios',
-#   :text => 'Interesante nota en el diario el Día sobre nuestro proyecto: http://go.gl/vffatrs',
-#   :author_id => admin.id
-# }, {
-#   :title => 'Voluntarios del mes',
-#   :text => 'Cumplimos un mes de proyecto. Gracias a todos los ciudadanod científicos, en particular a Pincha49, AleGomez, Rochucraft y Maguila, por ser quienes mas contribuciones han hecho en el último mes.',
-#   :author_id => admin.id
-# }])
+News.create([{
+  :title => 'Lanzamiento del proyecto',
+  :text => 'Esta semana se inicia este proyecto, en el que todos colaboraremos para catalogar y estudiar parte del patrimonio cultural de nuestra ciudad.',
+  :author_id => admin.id
+}, {
+  :title => 'Semana del barrio Meridiano',
+  :text => 'Esta semana el objetivo es conocer mas de este tradicional barrio, corazón cultural de La Plata.',
+  :author_id => admin.id
+}, {
+  :title => 'Cientopolis en los medios',
+  :text => 'Interesante nota en el diario el Día sobre nuestro proyecto: http://go.gl/vffatrs',
+  :author_id => admin.id
+}, {
+  :title => 'Voluntarios del mes',
+  :text => 'Cumplimos un mes de proyecto. Gracias a todos los ciudadanod científicos, en particular a Pincha49, AleGomez, Rochucraft y Maguila, por ser quienes mas contribuciones han hecho en el último mes.',
+  :author_id => admin.id
+}])
 
-# 10.times do |i|
-#   TutorialStep.create([{
-#     :title => "Paso #{i + 1}",
-#     :text => "Texto del paso #{i + 1}",
-#     :position => i
-#   }])
-# end
+10.times do |i|
+  TutorialStep.create([{
+    :title => "Paso #{i + 1}",
+    :text => "Texto del paso #{i + 1}",
+    :position => i
+  }])
+end
 
 # users = User.create([{
 #   :sub => 'Test1',

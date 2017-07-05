@@ -21,5 +21,7 @@ module Spotters
           :methods => [:get, :post, :options, :delete, :put]
       end
     end
+
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end
