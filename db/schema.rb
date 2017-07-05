@@ -34,14 +34,14 @@ ActiveRecord::Schema.define(version: 20160929123047) do
   end
 
   create_table "candidates", force: :cascade do |t|
-    t.integer   "status",                                                              default: 0, null: false
-    t.geography "location",   limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer   "status",                                                                 default: 0, null: false
+    t.geography "location",   limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.float     "heading"
     t.float     "pitch"
-    t.integer   "owner_id",                                                                        null: false
+    t.integer   "owner_id",                                                                           null: false
     t.integer   "expert_id"
-    t.datetime  "created_at",                                                                      null: false
-    t.datetime  "updated_at",                                                                      null: false
+    t.datetime  "created_at",                                                                         null: false
+    t.datetime  "updated_at",                                                                         null: false
     t.index ["expert_id"], name: "index_candidates_on_expert_id", using: :btree
     t.index ["location"], name: "index_candidates_on_location", using: :gist
     t.index ["owner_id"], name: "index_candidates_on_owner_id", using: :btree
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(version: 20160929123047) do
   create_table "confs", force: :cascade do |t|
     t.string    "title"
     t.integer   "zoom"
-    t.geography "center",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "center",             limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.float     "heading_center"
     t.float     "pitch_center"
-    t.geography "bounds",             limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
+    t.geography "bounds",             limit: {:srid=>4326, :type=>"st_polygon", :geographic=>true}
     t.integer   "proximity_distance"
-    t.datetime  "created_at",                                                                    null: false
-    t.datetime  "updated_at",                                                                    null: false
+    t.datetime  "created_at",                                                                       null: false
+    t.datetime  "updated_at",                                                                       null: false
     t.index ["bounds"], name: "index_confs_on_bounds", using: :gist
     t.index ["center"], name: "index_confs_on_center", using: :gist
   end

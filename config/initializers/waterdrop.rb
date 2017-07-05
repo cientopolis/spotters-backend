@@ -3,6 +3,6 @@ WaterDrop.setup do |config|
   config.connection_pool_size = 20
   config.connection_pool_timeout = 1
   config.raise_on_failure = false
-  config.kafka.hosts = [Rails.env.production? ? 'prod-host:9091' : 'localhost:9092']
+  config.kafka.hosts = [Rails.env.production? ? 'metagame:9091' : 'metagame:9092']
   config.raise_on_failure = Rails.env.production?
 end
