@@ -21,6 +21,9 @@ class Api::V1::MessagesController < ApplicationController
     @message.user = current_user
 
     if @message.save
+      # Se envía la información al Metagame
+      Metagame.send_reinforcement(@candidate)
+
       render :show, status: :created, location: api_v1_candidate_messages_url(@candidate, @message)
     else
       render json: @message.errors, status: :unprocessable_entity

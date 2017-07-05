@@ -19,6 +19,8 @@ class Api::V1::UsersController < ApplicationController
       @user.email = params[:user][:email]
       @user.save
     end
+    # Se envía la información al Metagame
+    Metagame.send_login
   end
 
   def tutorial_complete

@@ -50,6 +50,9 @@ class Api::V1::CandidatesController < ApplicationController
     @candidate.location = factory.point(candidate_params[:lng], candidate_params[:lat])
     @candidate.status = Candidate.statuses[candidate_params[:status]]
     if @candidate.save
+      # Se envía la información al Metagame
+      Metagame.send_contribution(@candidate)
+
       render :show, status: :created, location: api_v1_candidate_url(@candidate)
     else
       render json: @candidate.errors, status: :unprocessable_entity

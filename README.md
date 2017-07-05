@@ -13,10 +13,10 @@ To run the application it is needed to have the following packages installed:
 ## Installation
 
 ```
-cp config/secrets.sample.yml
+cp config/secrets.sample.yml config/secrets.yml
 ```
 
-Configure in that file your own API keys and secrets and then:
+Configure that file with your own API keys and secrets and then:
 
 ```
 cd railsbox/development

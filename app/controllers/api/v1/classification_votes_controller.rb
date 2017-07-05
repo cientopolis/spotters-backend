@@ -23,6 +23,9 @@ class Api::V1::ClassificationVotesController < ApplicationController
     @classification_vote.classification = @classification
 
     if @classification_vote.save
+      # Se envía la información al Metagame
+      Metagame.send_reinforcement(@candidate)
+      
       render :show, status: :created, location: api_v1_candidate_classification_classification_vote_url(@candidate, @classification, @classification_vote)
     else
       render json: @classification_vote.errors, status: :unprocessable_entity

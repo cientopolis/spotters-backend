@@ -22,6 +22,9 @@ class Api::V1::MessageVotesController < ApplicationController
     @message_vote.message = @message
 
     if @message_vote.save
+      # Se envía la información al Metagame
+      Metagame.send_reinforcement(@candidate)
+
       render :show, status: :created, location: api_v1_candidate_message_message_vote_url(@candidate, @message, @message_vote)
     else
       format.json { render json: @message_vote.errors, status: :unprocessable_entity }
