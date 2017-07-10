@@ -23,7 +23,7 @@ class Api::V1::MessageVotesController < ApplicationController
 
     if @message_vote.save
       # Se envía la información al Metagame
-      Metagame.send_reinforcement(@candidate)
+      Metagame::Metagame.send_reinforcement(current_user, @candidate)
 
       render :show, status: :created, location: api_v1_candidate_message_message_vote_url(@candidate, @message, @message_vote)
     else

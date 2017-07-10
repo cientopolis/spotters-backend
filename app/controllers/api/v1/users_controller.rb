@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
       @user.save
     end
     # Se envía la información al Metagame
-    Metagame.send_login
+    Metagame::Metagame.send_login(current_user)
   end
 
   def tutorial_complete

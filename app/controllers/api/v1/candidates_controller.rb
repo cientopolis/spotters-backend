@@ -51,7 +51,7 @@ class Api::V1::CandidatesController < ApplicationController
     @candidate.status = Candidate.statuses[candidate_params[:status]]
     if @candidate.save
       # Se envía la información al Metagame
-      Metagame.send_contribution(@candidate)
+      Metagame::Metagame.send_contribution(current_user, @candidate)
 
       render :show, status: :created, location: api_v1_candidate_url(@candidate)
     else
