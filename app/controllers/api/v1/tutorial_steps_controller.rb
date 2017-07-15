@@ -4,7 +4,7 @@ class Api::V1::TutorialStepsController < ApplicationController
 
   # GET /tutorial_steps.json
   def index
-    @tutorial_steps = TutorialStep.all
+    @tutorial_steps = TutorialStep.order(:position)
   end
 
   # GET /tutorial_steps/1.json

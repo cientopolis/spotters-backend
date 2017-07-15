@@ -64,7 +64,7 @@ module Metagame
       conf = Conf.all.first
 
       arguments = []
-      if data[:candidate].nil?
+      if data[:candidate].present?
         arguments = [
           {
             candidate_id: data[:candidate].id
