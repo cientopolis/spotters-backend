@@ -77,9 +77,10 @@ cp config/secrets.sample.yml config/secrets.yml
 nano config/secrets.yml
 ```
 
-Finally, run the following commands in the terminal to set up the database schema and start the web server.
+Finally, run the following commands in the terminal to download the required dependencies, set up the database schema and start the web server.
 
 ```
+bundle install
 rake db:migrate
 rails s
 ```
