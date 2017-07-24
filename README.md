@@ -56,6 +56,8 @@ To run this project locally you need to install the following packages:
 * [PostgreSQL](https://www.postgresql.org/)
 * [PostGIS](http://postgis.net/)
 
+You can follow the guide provided by [GoRails](https://gorails.com/setup/) to set up your environment.
+
 You will also need an [Auth0 Account](https://auth0.com/).
 
 ### Installation
